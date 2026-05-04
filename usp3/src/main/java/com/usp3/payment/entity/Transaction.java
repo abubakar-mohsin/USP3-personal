@@ -10,9 +10,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "transactions")
+@Getter
+@Setter
 public class Transaction extends BaseEntity {
 
     @Column(nullable = false, unique = true)
@@ -34,6 +38,9 @@ public class Transaction extends BaseEntity {
     @Column(nullable = false)
     private int attemptCount = 0;
 
+    @Column(nullable = false)
+    private boolean flaggedForReview = false;
+
     protected Transaction() {}
 
     public Transaction(String reference, Long amount, String currency, 
@@ -53,6 +60,22 @@ public class Transaction extends BaseEntity {
 
     public String getReference() {
         return reference;
+    }
+
+    public UUID getMerchantId() {
+        return merchantId;
+    }
+
+    public Long getAmount() {
+        return amount;
+    }
+
+    public boolean isFlaggedForReview() {
+        return flaggedForReview;
+    }
+
+    public void setFlaggedForReview(boolean flaggedForReview) {
+        this.flaggedForReview = flaggedForReview;
     }
 }
 

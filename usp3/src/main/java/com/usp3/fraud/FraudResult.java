@@ -61,6 +61,7 @@ public class FraudResult extends BaseEntity {
 
     public String getTransactionId() { return transactionId; }
     public int getRiskScore() { return riskScore; }
+    public int getFraudScore() { return riskScore; } // Alias for compatibility
     public FraudDecision getDecision() { return decision; }
     public ConfidenceLevel getConfidenceLevel() { return confidenceLevel; }
     public String getTriggeredRules() { return triggeredRules; }

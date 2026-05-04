@@ -1,8 +1,9 @@
-package com.usp3.security;
+package com.usp3.security.entity;
 
 import java.time.Instant;
 
 import com.usp3.platform.BaseEntity;
+import com.usp3.security.entity.enums.DeviceType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

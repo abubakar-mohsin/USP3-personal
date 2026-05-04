@@ -1,11 +1,17 @@
 package com.usp3.platform;
 
-import jakarta.persistence.*;
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.UUID;
-import java.io.Serializable;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
@@ -36,4 +42,8 @@ public abstract class BaseEntity implements Serializable {
     public Instant getCreatedAt() { return createdAt; }
     public Instant getUpdatedAt() { return updatedAt; }
     public String getTraceId() { return traceId; }
+    
+    // Setters for protected fields
+    public void setTenantId(String tenantId) { this.tenantId = tenantId; }
+    public void setTraceId(String traceId) { this.traceId = traceId; }
 }

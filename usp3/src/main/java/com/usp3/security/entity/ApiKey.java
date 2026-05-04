@@ -1,10 +1,12 @@
 package com.usp3.security.entity;
 
+import java.util.UUID;
+
 import com.usp3.platform.BaseEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import java.util.UUID; // Import UUID
+import jakarta.persistence.Table; // Import UUID
 
 @Entity
 @Table(name = "api_keys")
@@ -16,22 +18,25 @@ public class ApiKey extends BaseEntity {
     @Column(nullable = false)
     private boolean active = true;
 
-    // FIX: Rename from tenantId to merchantId to match reviewer feedback
     @Column(nullable = false)
-    private UUID merchantId; 
+    private UUID merchantId;
+
+    // Non-secret display fingerprint (e.g., sk_sandbox_xxxx)
+    @Column(nullable = false, length = 64)
+    private String displayValue;
 
     protected ApiKey() {}
 
-    public ApiKey(String keyHash, UUID merchantId) {
+    public ApiKey(String keyHash, UUID merchantId, String displayValue) {
         this.keyHash = keyHash;
         this.merchantId = merchantId;
+        this.displayValue = displayValue;
         this.active = true;
     }
 
-    // Getters
     public String getKeyHash() { return keyHash; }
     public boolean isActive() { return active; }
-    
-    // This is the method your Service calls!
     public UUID getMerchantId() { return merchantId; }
+    public String getDisplayValue() { return displayValue; }
+    public void deactivate() { this.active = false; }
 }
